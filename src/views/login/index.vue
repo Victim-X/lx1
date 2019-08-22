@@ -80,7 +80,15 @@ export default {
     login () {
       this.$refs.loginForm.validate(isOK => {
         if (isOK) {
-
+          this.$axios({
+            method: 'post',
+            url: '/authorizations',
+            data: this.formData // post 参数在data中写入
+          }).then(resule => {
+            window.localStorage.setItem('user-info', JSON.stringify(resule.data.data))
+            // 跳转，使用编程式导航
+            this.$router.push('/home')
+          })
         }
       })
     }
