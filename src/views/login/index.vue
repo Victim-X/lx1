@@ -88,6 +88,11 @@ export default {
             window.localStorage.setItem('user-info', JSON.stringify(resule.data.data))
             // 跳转，使用编程式导航
             this.$router.push('/home')
+          }).catch(() => {
+            this.$message({
+              message: '用户名或密码错误',
+              type: 'warning'
+            })
           })
         }
       })
