@@ -42,7 +42,7 @@
         <el-menu-item index="2-1">粉丝画像</el-menu-item>
         <el-menu-item index="2-2">图文数据</el-menu-item>
         <el-menu-item index="2-3">粉丝列表</el-menu-item>
-        <el-menu-item index="2-3">粉丝概况</el-menu-item>
+        <el-menu-item index="2-4">粉丝概况</el-menu-item>
       </el-submenu>
       <el-menu-item index="3">
         <i class="el-icon-user
