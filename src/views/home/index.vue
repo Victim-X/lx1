@@ -7,7 +7,8 @@
     <el-header>
       <layout-header></layout-header>
     </el-header>
-    <el-main>主体</el-main>
+    <!-- 二级路由容器 -->
+    <router-view></router-view>
   </el-container>
 </el-container>
 </template>

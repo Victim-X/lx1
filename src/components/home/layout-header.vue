@@ -7,16 +7,21 @@
       </div>
     </el-col>
     <el-col :span="3" style="display:flex;align-items:center">
-      <img style='width:40px;height:40px;border-radius:50%;margin-right:10px;align-items:center' src="../../assets/img/avatar.jpg" alt />
-      <el-dropdown trigger="click">
+      <!-- 头像图片未设置需要给一个默认值 -->
+      <img
+        style="width:40px;height:40px;border-radius:50%;margin-right:10px;align-items:center"
+        :src="user.photo ? user.photo:defaultImg"
+        alt
+      />
+      <el-dropdown @command='commandAction'>
         <span class="el-dropdown-link">
-          用户名
+          {{ user.name }}
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>个人信息</el-dropdown-item>
-          <el-dropdown-item>git地址</el-dropdown-item>
-          <el-dropdown-item>退出</el-dropdown-item>
+          <el-dropdown-item command='account'>个人信息</el-dropdown-item>
+          <el-dropdown-item command='git'>git地址</el-dropdown-item>
+          <el-dropdown-item command='out'>退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </el-col>
@@ -24,7 +29,41 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data () {
+    return {
+      user: {},
+      defaultImg: require('../../assets/img/avatar.jpg')// require的图片编程base64
+    }
+  },
+  methods: {
+    // 参数中的command是点击的菜单项的属性值
+    commandAction (command) {
+      if (command === 'account') {
+        // this.$router.push('/home/account')
+      } else if (command === 'git') {
+        window.location.href = 'https://github.com/Victim-X/lx1'
+      } else {
+        window.localStorage.clear()// 擦除本项目在浏览器中的所有缓存
+        this.$router.push('/login')
+      }
+    },
+    getUserInfo () {
+      let userInfo = window.localStorage.getItem('user-info') // 获取用户存储信息
+      let token = userInfo ? JSON.parse(userInfo).token : null
+      this.$axios({
+        // method: 'get'//默认是get  可以不用写
+        url: '/user/profile',
+        headers: { 'Authorization': `Bearer ${token}` } // 在headers中赋值 token 携带令牌
+      }).then(result => {
+        this.user = result.data.data // 获取到用户的最新的个人资料
+      })
+    }
+  },
+  created () {
+    this.getUserInfo()
+  }
+}
 </script>
 
 <style>
