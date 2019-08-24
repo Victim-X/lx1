@@ -49,14 +49,11 @@ export default {
       }
     },
     getUserInfo () {
-      let userInfo = window.localStorage.getItem('user-info') // 获取用户存储信息
-      let token = userInfo ? JSON.parse(userInfo).token : null
       this.$axios({
         // method: 'get'//默认是get  可以不用写
-        url: '/user/profile',
-        headers: { 'Authorization': `Bearer ${token}` } // 在headers中赋值 token 携带令牌
+        url: '/user/profile'
       }).then(result => {
-        this.user = result.data.data // 获取到用户的最新的个人资料
+        this.user = result.data // 获取到用户的最新的个人资料
       })
     }
   },

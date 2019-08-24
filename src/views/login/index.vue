@@ -57,16 +57,17 @@ export default {
         // },
         {
           pattern: /^1[3456789]\d{9}$/,
-          message: '手机号格式错误'
-          // trigger: 'blur'
+          message: '手机号格式错误',
+          trigger: 'blur'
         }],
 
         code: [{
           required: true,
-          message: '请输入验证码',
-          trigger: 'blur'
+          message: '请输入验证码'
+          // trigger: 'blur'
         }, {
-          pattern: /^\d{6}$/
+          pattern: /^\d{6}$/,
+          message: '验证码格式错误'
         }],
         check: [{
           required: true,
@@ -85,14 +86,9 @@ export default {
             url: '/authorizations',
             data: this.formData // post 参数在data中写入
           }).then(resule => {
-            window.localStorage.setItem('user-info', JSON.stringify(resule.data.data))
+            window.localStorage.setItem('user-info', JSON.stringify(resule.data))
             // 跳转，使用编程式导航
             this.$router.push('/home')
-          }).catch(() => {
-            this.$message({
-              message: '用户名或密码错误',
-              type: 'warning'
-            })
           })
         }
       })
