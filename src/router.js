@@ -24,6 +24,10 @@ export default new Router({
         {
           path: '',
           component: Main
+        },
+        {
+          path: '/home/comment', // 也可以直接写comment  不能写斜杠
+          component: () => import('./views/comment')
         }
       ]
     }
