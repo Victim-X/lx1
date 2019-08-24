@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
+import router from './permission'
 import Element from 'element-ui'
 import axios from 'axios'
 import Component from './components'
